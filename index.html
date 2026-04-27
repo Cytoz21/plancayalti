@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía Completa: Cayaltí 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --caña: #C8860A;
+    --caña-light: #F5C842;
+    --tierra: #5C3A1E;
+    --tierra-light: #8B5E3C;
+    --verde: #2D6A2F;
+    --verde-light: #4CAF50;
+    --cielo: #1A3A5C;
+    --arena: #F7F0E4;
+    --blanco: #FDFBF7;
+    --gris: #6B6560;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blanco);
+    color: #2A1F15;
+    line-height: 1.7;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--cielo) 0%, #0D2B45 40%, var(--tierra) 100%);
+    padding: 70px 40px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent, transparent 30px,
+      rgba(200,134,10,0.07) 30px, rgba(200,134,10,0.07) 31px
+    );
+  }
+
+  .hero-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--caña-light);
+    margin-bottom: 16px;
+    opacity: 0.9;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(44px, 8vw, 80px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.05;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 span { color: var(--caña-light); }
+
+  .hero-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.75);
+    max-width: 560px;
+    margin: 0 auto 36px;
+  }
+
+  .hero-tags {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+  }
+
+  .hero-tag {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(245,200,66,0.35);
+    color: var(--caña-light);
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  /* NAV */
+  .nav {
+    background: var(--tierra);
+    position: sticky; top: 0; z-index: 100;
+    display: flex; overflow-x: auto;
+    padding: 0 20px;
+    scrollbar-width: none;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+
+  .nav a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    padding: 14px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    transition: color 0.2s;
+    border-bottom: 2px solid transparent;
+  }
+
+  .nav a:hover { color: var(--caña-light); border-bottom-color: var(--caña-light); }
+
+  /* LAYOUT */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+  /* SECTIONS */
+  section { padding: 60px 0; border-bottom: 1px solid #E8E0D4; }
+  section:last-child { border-bottom: none; }
+
+  .section-header {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 36px;
+  }
+
+  .section-icon {
+    width: 48px; height: 48px;
+    background: var(--caña);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--tierra);
+  }
+
+  .section-header p {
+    font-size: 14px;
+    color: var(--gris);
+    margin-top: 2px;
+  }
+
+  /* CARDS */
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+
+  .card {
+    background: var(--arena);
+    border-radius: 16px;
+    padding: 24px;
+    border-left: 4px solid var(--caña);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(92,58,30,0.12); }
+
+  .card-emoji { font-size: 28px; margin-bottom: 10px; display: block; }
+  .card h3 { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--tierra); margin-bottom: 8px; }
+  .card p { font-size: 14px; color: #4A3828; line-height: 1.6; }
+
+  .card.verde { border-left-color: var(--verde); }
+  .card.cielo { border-left-color: var(--cielo); }
+  .card.gold { border-left-color: var(--caña-light); }
+
+  /* INFO BOXES */
+  .info-box {
+    background: #FFF8EC;
+    border: 1px solid #F5C842;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+
+  .info-box .ib-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+  .info-box strong { color: var(--tierra); font-size: 15px; display: block; margin-bottom: 4px; }
+  .info-box p { font-size: 14px; color: #4A3828; }
+
+  .info-box.blue { background: #EFF6FF; border-color: #93C5FD; }
+  .info-box.green { background: #F0FFF4; border-color: #86EFAC; }
+  .info-box.red { background: #FFF5F5; border-color: #FCA5A5; }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th { background: var(--tierra); color: #fff; padding: 12px 16px; text-align: left; font-weight: 500; }
+  td { padding: 11px 16px; border-bottom: 1px solid #E8E0D4; color: #3A2A1E; }
+  tr:nth-child(even) td { background: #FAF5EE; }
+  tr:hover td { background: #F5EDD8; }
+
+  /* CLIMA VISUAL */
+  .clima-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; }
+  .clima-card {
+    text-align: center; background: var(--arena); border-radius: 12px; padding: 16px 8px;
+  }
+  .clima-card .mes { font-size: 12px; font-weight: 600; color: var(--gris); text-transform: uppercase; letter-spacing: 1px; }
+  .clima-card .temp { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--tierra); font-weight: 700; }
+  .clima-card .desc { font-size: 11px; color: var(--gris); margin-top: 4px; }
+
+  /* TAGS */
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .tag {
+    background: var(--caña);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .tag.g { background: var(--verde); }
+  .tag.b { background: var(--cielo); }
+
+  /* DISTANCES */
+  .dist-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 0; border-bottom: 1px solid #E8E0D4;
+  }
+  .dist-item:last-child { border-bottom: none; }
+  .dist-name { font-weight: 500; color: var(--tierra); }
+  .dist-sub { font-size: 13px; color: var(--gris); }
+  .dist-km {
+    background: var(--tierra);
+    color: #fff;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-left: 16px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--tierra);
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+    padding: 30px 24px;
+    font-size: 13px;
+  }
+  footer strong { color: var(--caña-light); }
+
+  @media (max-width: 600px) {
+    .hero { padding: 50px 20px 40px; }
+    section { padding: 44px 0; }
+    .cards { grid-template-columns: 1fr; }
+    .clima-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">Guía de Estadía · 6 Meses · 2026</div>
+  <h1>Bienvenido a<br><span>Cayaltí</span></h1>
+  <p class="hero-sub">Todo lo que necesitas saber para planificar tu vida fuera del trabajo en el corazón azucarero del norte peruano.</p>
+  <div class="hero-tags">
+    <span class="hero-tag">📍 Lambayeque, Perú</span>
+    <span class="hero-tag">🌡️ 22–32°C promedio</span>
+    <span class="hero-tag">38 km de Chiclayo</span>
+    <span class="hero-tag">🏭 Capital azucarera</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#overview">Panorama</a>
+  <a href="#clima">Clima</a>
+  <a href="#local">Qué hacer</a>
+  <a href="#excursiones">Excursiones</a>
+  <a href="#gastronomia">Gastronomía</a>
+  <a href="#deporte">Deporte & Fitness</a>
+  <a href="#practica">Info Práctica</a>
+</nav>
+
+<!-- PANORAMA -->
+<section id="overview">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon">🏘️</div>
+      <div>
+        <h2>Panorama General</h2>
+        <p>Qué es Cayaltí y cómo entenderla rápido</p>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <div class="ib-icon">📌</div>
+      <div>
+        <strong>Ubicación</strong>
+        <p>Cayaltí es uno de los 20 distritos de la provincia de Chiclayo, en el departamento de Lambayeque. Está a <strong>38 km al sureste de Chiclayo</strong> y a 81 msnm. Limita con Pomalca al norte, Oyotún al este, Zaña al oeste y la provincia de Chepén (La Libertad) al sur.</p>
+      </div>
+    </div>
+
+    <div class="info-box green">
+      <div class="ib-icon">🌾</div>
+      <div>
+        <strong>Identidad del pueblo</strong>
+        <p>Cayaltí es históricamente un pueblo agroindustrial construido alrededor de su famosa hacienda azucarera, fundada en 1850. Hoy la Empresa Agroindustrial Cayaltí opera unas 6,500 hectáreas entre caña de azúcar y maíz. Es también reconocida por sus <strong>desfiles de Caballo de Paso</strong>, una tradición muy arraigada.</p>
+      </div>
+    </div>
+
+    <div class="info-box blue">
+      <div class="ib-icon">🗺️</div>
+      <div>
+        <strong>Cómo moverse</strong>
+        <p>El pueblo es de escala caminable. Para salir, hay combis y colectivos frecuentes hacia Chiclayo (aprox. 50–60 min, ~S/5–8). Chiclayo es tu gran base para compras, hospitales, gimnasios de cadena, cine y vida nocturna. Desde Cayaltí también puedes llegar fácilmente a Zaña (muy cerca) y Chiclayo es puerta a toda la región.</p>
+      </div>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <span class="card-emoji">🏛️</span>
+        <h3>Historia profunda</h3>
+        <p>El territorio fue habitado por las culturas Chavín, Mochica y Chimú. El arqueólogo Walter Alva descubrió un geoglifo chavínoide en la Pampa de Caña-Cruz. El cerro Corbacho guarda vestigios de Chimú e Inca.</p>
+      </div>
+      <div class="card verde">
+        <span class="card-emoji">🤝</span>
+        <h3>Gente cálida</h3>
+        <p>Pueblo chico, gente abierta y solidaria. El ritmo de vida es tranquilo. La comunidad gira en torno al trabajo de campo, el deporte local y las fiestas patronales. Es un excelente lugar para hacer vida de barrio.</p>
+      </div>
+      <div class="card cielo">
+        <span class="card-emoji">🛣️</span>
+        <h3>Posición estratégica</h3>
+        <p>En 45–60 min llegas a Chiclayo (ciudad completa). En 30 min estás en Zaña (ruinas coloniales). En ~1.5 h llegas a la costa de Pimentel. Bien ubicado para escapadas de fin de semana.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIMA -->
+<section id="clima">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon">☀️</div>
+      <div>
+        <h2>Clima en Cayaltí</h2>
+        <p>Qué esperar en tus 6 meses (mayo–noviembre 2026)</p>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <div class="ib-icon">🌡️</div>
+      <div>
+        <strong>Clima general</strong>
+        <p>Lambayeque tiene un clima <strong>semitropical con humedad elevada</strong>. La temperatura promedio anual es de 22.5°C, con máximas de hasta 35°C en verano (ene–mar) y mínimas de ~15°C en julio–agosto. Tu estadía (mayo a noviembre) es la <strong>época seca y más fresca</strong>, con cielos más despejados.</p>
+      </div>
+    </div>
+
+    <div class="clima-grid" style="margin-bottom:24px;">
+      <div class="clima-card">
+        <div class="mes">Mayo</div>
+        <div class="temp">26°</div>
+        <div class="desc">Bajando, seco</div>
+      </div>
+      <div class="clima-card">
+        <div class="mes">Junio</div>
+        <div class="temp">24°</div>
+        <div class="desc">Fresco, nublado</div>
+      </div>
+      <div class="clima-card">
+        <div class="mes">Julio</div>
+        <div class="temp">22°</div>
+        <div class="desc">El más fresco</div>
+      </div>
+      <div class="clima-card">
+        <div class="mes">Agosto</div>
+        <div class="temp">22°</div>
+        <div class="desc">Frío de madrugada</div>
+      </div>
+      <div class="clima-card">
+        <div class="mes">Sept.</div>
+        <div class="temp">24°</div>
+        <div class="desc">Mejorando</div>
+      </div>
+      <div class="clima-card">
+        <div class="mes">Oct.</div>
+        <div class="temp">26°</div>
+        <div class="desc">Más cálido</div>
+      </div>
+      <div class="clima-card">
+        <div class="mes">Nov.</div>
+        <div class="temp">28°</div>
+        <div class="desc">Calor regresa</div>
+      </div>
+    </div>
+
+    <div class="info-box red">
+      <div class="ib-icon">👕</div>
+      <div>
+        <strong>Qué llevar</strong>
+        <p>Ropa ligera para el día (algodón), una casaca o polar ligero para las noches de junio–agosto. Protector solar siempre (el sol norteño es intenso aunque no haga calor extremo). Sombrero/gorra para actividades al aire libre y repelente si vas a zonas de campo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUÉ HACER LOCAL -->
+<section id="local">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon">🎯</div>
+      <div>
+        <h2>Qué Hacer en Cayaltí</h2>
+        <p>Actividades y puntos de interés dentro y cerca del pueblo</p>
+      </div>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <span class="card-emoji">🏛️</span>
+        <h3>Casa-Hacienda Cayaltí</h3>
+        <p>Construida en 1850 con estilo francés, ocupa 1.5 hectáreas. Ha sido restaurada con fotografías históricas de la época de oro azucarera, una calesa, cajas fuertes de 3 toneladas y reliquias de la familia Aspíllaga. <strong>El must local número 1.</strong></p>
+      </div>
+      <div class="card verde">
+        <span class="card-emoji">⛰️</span>
+        <h3>Cerro Corbacho</h3>
+        <p>En sus faldas están los restos arqueológicos más antiguos de la zona, correspondientes a las culturas Chimú e Inca. Una caminata accesible con vistas al valle cañaveral. Ideal para mañanas frescas.</p>
+      </div>
+      <div class="card cielo">
+        <span class="card-emoji">🌾</span>
+        <h3>Campos de caña</h3>
+        <p>Paseos a pie o en bici por los bordes de los cañaverales. La vista de los campos al atardecer es impresionante. Pregunta localmente por los horarios de cosecha para verla en acción.</p>
+      </div>
+      <div class="card gold">
+        <span class="card-emoji">🐎</span>
+        <h3>Caballo de Paso</h3>
+        <p>Cayaltí es reconocida por sus desfiles de Caballo de Paso, tradición muy viva. Busca fechas de eventos locales — son espectáculos únicos de cultura norteña que no se ven en el sur del país.</p>
+      </div>
+      <div class="card">
+        <span class="card-emoji">🎊</span>
+        <h3>Fiestas Patronales</h3>
+        <p>El calendario festivo del norte es intenso. Mientras estés, podrías vivir festividades de San Juan (junio), fiestas patrias (julio), Cruz de Chalpón (agosto) y la Semana Turística de Chiclayo.</p>
+      </div>
+      <div class="card verde">
+        <span class="card-emoji">🌄</span>
+        <h3>Huaca Mataindios</h3>
+        <p>Vestigio arqueológico prehispánico ubicado en el entorno del distrito. Parte del rico patrimonio cultural de la zona del río Zaña, usada por culturas Moche y Lambayeque.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXCURSIONES -->
+<section id="excursiones">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon">🗺️</div>
+      <div>
+        <h2>Excursiones desde Cayaltí</h2>
+        <p>Lo mejor de la región para tus fines de semana y días libres</p>
+      </div>
+    </div>
+
+    <div style="margin-bottom:28px;">
+      <div class="dist-item">
+        <div>
+          <div class="dist-name">🏚️ Ruinas de Zaña — Ciudad Fantasma</div>
+          <div class="dist-sub">Conventos coloniales en ruinas, Museo Afroperuano, puente colgante centenario · Patrimonio UNESCO · <strong>El más cercano y más espectacular</strong></div>
+        </div>
+        <span class="dist-km">~15 km</span>
+      </div>
+      <div class="dist-item">
+        <div>
+          <div class="dist-name">🏖️ Playa Pimentel</div>
+          <div class="dist-sub">Playa con malecón, vóley playa, surf suave, ceviche fresco. Perfecta escapada costera de fin de semana.</div>
+        </div>
+        <span class="dist-km">~60 km</span>
+      </div>
+      <div class="dist-item">
+        <div>
+          <div class="dist-name">👑 Museo Tumbas Reales del Señor de Sipán</div>
+          <div class="dist-sub">Uno de los descubrimientos arqueológicos más importantes de América. +2000 objetos de oro, plata y cerámica Mochica. Imprescindible.</div>
+        </div>
+        <span class="dist-km">~55 km</span>
+      </div>
+      <div class="dist-item">
+        <div>
+          <div class="dist-name">🔺 Pirámides de Túcume</div>
+          <div class="dist-sub">26 pirámides preincaicas incluyendo la Huaca Larga, la más grande del mundo en su tipo. Valle de las Pirámides.</div>
+        </div>
+        <span class="dist-km">~75 km</span>
+      </div>
+      <div class="dist-item">
+        <div>
+          <div class="dist-name">🦁 Bosque de Pómac</div>
+          <div class="dist-sub">Santuario Histórico Natural con el bosque de algarrobos más denso del planeta + 36 pirámides Sicán. Caminata o caballo.</div>
+        </div>
+        <span class="dist-km">~80 km</span>
+      </div>
+      <div class="dist-item">
+        <div>
+          <div class="dist-name">🌊 Jagüeyes de Mayascón</div>
+          <div class="dist-sub">8 pozos de agua turquesa naturales con cascada. Caminata memorable. Bucólico y poco conocido.</div>
+        </div>
+        <span class="dist-km">~90 km</span>
+      </div>
+      <div class="dist-item">
+        <div>
+          <div class="dist-name">🏙️ Chiclayo — Ciudad de la Amistad</div>
+          <div class="dist-sub">Capital regional completa: malls, cines, restaurantes, hospitales, clubs, Smart Fit, Mercado Modelo, Mercado de las Brujas, vida nocturna.</div>
+        </div>
+        <span class="dist-km">~38 km</span>
+      </div>
+    </div>
+
+    <div class="info-box green">
+      <div class="ib-icon">💡</div>
+      <div>
+        <strong>Tip de planificación</strong>
+        <p>Zaña está tan cerca de Cayaltí que puedes ir en mototaxi o colectivo en minutos — es una salida de tarde perfecta. Para Chiclayo, las combis son frecuentes y económicas. Para Sipán, Túcume o Pimentel, una buena opción es alquilar auto en Chiclayo o unirte a tours day trip desde allí.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GASTRONOMÍA -->
+<section id="gastronomia">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon">🍽️</div>
+      <div>
+        <h2>Gastronomía que Debes Probar</h2>
+        <p>La cocina norteña es una de las más ricas del Perú — aprovéchala</p>
+      </div>
+    </div>
+
+    <table style="margin-bottom:28px;">
+      <tr>
+        <th>Plato</th>
+        <th>Descripción</th>
+        <th>Dónde probar</th>
+      </tr>
+      <tr>
+        <td><strong>Arroz con Pato</strong> 🦆</td>
+        <td>El plato bandera de Lambayeque. Pato cocido con culantro, cerveza negra y zapallo loche. Verde, aromático e inigualable.</td>
+        <td>Chiclayo / restaurantes locales</td>
+      </tr>
+      <tr>
+        <td><strong>Cabrito a la Norteña</strong></td>
+        <td>Cabrito macerado en chicha de jora, ají mirasol y loche. Servido con frejoles, yuca y arroz. Si es a la leña, insuperable.</td>
+        <td>Mercados y picanterías</td>
+      </tr>
+      <tr>
+        <td><strong>Ceviche de Toyo</strong> 🐟</td>
+        <td>El ceviche norteño usa toyo (tiburón) o pescado local. Acompañado con tortita de choclo — diferente al limeño.</td>
+        <td>Pimentel o Chiclayo</td>
+      </tr>
+      <tr>
+        <td><strong>Chinguirito</strong></td>
+        <td>Ceviche de pez guitarra seco y deshilachado. Patrimonio Cultural de la Nación. Sabor intenso y único.</td>
+        <td>Chiclayo, mercados</td>
+      </tr>
+      <tr>
+        <td><strong>Espesado</strong></td>
+        <td>Plato del Señor de Sipán — sopa espesa de choclo, frejoles verdes y carne de res. Se come especialmente los lunes.</td>
+        <td>Picanterías locales</td>
+      </tr>
+      <tr>
+        <td><strong>Chirimpico</strong></td>
+        <td>Guiso de menudencias de cabrito con hierbabuena, chicha y ají. Acompañado de yuca, camote y sangrecita.</td>
+        <td>Picanterías del norte</td>
+      </tr>
+      <tr>
+        <td><strong>King Kong</strong> 🍪</td>
+        <td>El postre regional por excelencia. Alfajor gigante de manjar blanco, piña y maní. Compra en Chiclayo para llevar.</td>
+        <td>Tiendas en Chiclayo</td>
+      </tr>
+      <tr>
+        <td><strong>Tortilla de Raya</strong></td>
+        <td>Tortilla con pez raya seco, deshilachado, con algas y cebolla. Acompañada de choclo y yuca.</td>
+        <td>Mercado / restaurantes</td>
+      </tr>
+    </table>
+
+    <div class="info-box">
+      <div class="ib-icon">🍺</div>
+      <div>
+        <strong>Para tomar</strong>
+        <p>La <strong>chicha de jora</strong> es la bebida ancestral de la zona — fermentada de maíz, se usa en la cocina y también se bebe. La <strong>chicha morada</strong> es la opción sin alcohol más popular. Y la cerveza Pilsen Callao domina en el norte. En Zaña también ofrecen natillas, rosquitas y empanaditas coloniales de postre.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPORTE & FITNESS -->
+<section id="deporte">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon">💪</div>
+      <div>
+        <h2>Deporte & Fitness</h2>
+        <p>Opciones para mantenerte activo en Cayaltí y Chiclayo</p>
+      </div>
+    </div>
+
+    <!-- GIMNASIOS -->
+    <h3 style="font-family:'Playfair Display',serif; font-size:20px; color:var(--tierra); margin-bottom:16px;">🏋️ Gimnasios</h3>
+
+    <div class="info-box">
+      <div class="ib-icon">📍</div>
+      <div>
+        <strong>En Cayaltí (pueblo pequeño)</strong>
+        <p>Cayaltí es un distrito rural-agroindustrial. Es probable que haya uno o dos <strong>gimnasios locales informales</strong> (con pesas y máquinas básicas), comunes en pueblos del norte. Pregunta localmente al llegar — se suelen conocer como "gym" o "sala de musculación" y cuestan muy poco al mes. La alternativa real para gym de calidad es Chiclayo.</p>
+      </div>
+    </div>
+
+    <div class="cards" style="margin-bottom:28px;">
+      <div class="card cielo">
+        <span class="card-emoji">⚡</span>
+        <h3>Smart Fit Chiclayo</h3>
+        <p>Cadena de gimnasios con 3 sedes en Chiclayo (Real Plaza, Mall Aventura y Luis Gonzales). Equipos modernos, clases, área cardio completa. Membresía asequible (~S/70–90/mes). <strong>La mejor opción de calidad.</strong></p>
+        <div class="tags"><span class="tag b">Chiclayo</span><span class="tag b">~38 km</span></div>
+      </div>
+      <div class="card verde">
+        <span class="card-emoji">🏠</span>
+        <h3>Gym local en Cayaltí</h3>
+        <p>Muy probable que exista al menos un gimnasio básico en el pueblo o en el casco urbano de la empresa. Pregunta a los trabajadores locales al llegar — suele ser la opción más conveniente para el día a día.</p>
+        <div class="tags"><span class="tag g">Local</span><span class="tag g">Económico</span></div>
+      </div>
+      <div class="card">
+        <span class="card-emoji">🌿</span>
+        <h3>Entrena al aire libre</h3>
+        <p>El clima seco de mayo a noviembre es ideal para correr o hacer rutinas al aire libre en los bordes de los cañaverales, la plaza o el cerro Corbacho temprano en la mañana.</p>
+        <div class="tags"><span class="tag">Gratis</span><span class="tag">Amanecer</span></div>
+      </div>
+    </div>
+
+    <!-- PISCINA -->
+    <h3 style="font-family:'Playfair Display',serif; font-size:20px; color:var(--tierra); margin-bottom:16px;">🏊 Piscina</h3>
+
+    <div class="cards" style="margin-bottom:28px;">
+      <div class="card cielo">
+        <span class="card-emoji">🏊</span>
+        <h3>Club El Tumi — Chiclayo</h3>
+        <p>Club campestre en Monsefú (cerca de Chiclayo) con <strong>2 piscinas para adultos y niños</strong>. Ambiente familiar, seguridad y mantenimiento constante. Horario 9am–6pm. Opción de hacerse socio o pagar entrada diaria.</p>
+        <div class="tags"><span class="tag b">Monsefú</span><span class="tag b">~50 km</span></div>
+      </div>
+      <div class="card verde">
+        <span class="card-emoji">🌊</span>
+        <h3>Playa Pimentel</h3>
+        <p>Si quieres nadar en el mar, Pimentel es la playa más cercana. Oleaje suave, buen para nadar y hacer vóley playa. Ideal para los fines de semana más calurosos de septiembre–noviembre.</p>
+        <div class="tags"><span class="tag g">~60 km</span><span class="tag g">Fin de semana</span></div>
+      </div>
+      <div class="card">
+        <span class="card-emoji">💧</span>
+        <h3>Piscina en Cayaltí</h3>
+        <p>La empresa agroindustrial y el municipio pueden tener instalaciones deportivas internas (muy común en las cooperativas azucareras del norte). Consulta al llegar si hay piscina de uso para trabajadores o socios.</p>
+        <div class="tags"><span class="tag">A consultar</span></div>
+      </div>
+    </div>
+
+    <!-- BASKETBALL -->
+    <h3 style="font-family:'Playfair Display',serif; font-size:20px; color:var(--tierra); margin-bottom:16px;">🏀 Basketball & Deporte Local</h3>
+
+    <div class="info-box green">
+      <div class="ib-icon">🏀</div>
+      <div>
+        <strong>Canchas en Cayaltí</strong>
+        <p>Los pueblos agroindustriales del norte tienen una <strong>fuerte tradición deportiva</strong> — desde la época de la hacienda los patrones promovían el deporte para la comunidad. Es muy probable que haya <strong>canchas de basketball y fulbito</strong> en el casco urbano, en el área de la empresa o en los locales comunales. El vóley también es muy popular. Al llegar, pregunta por el "complejo deportivo" o "losa deportiva" — suelen organizar campeonatos los fines de semana.</p>
+      </div>
+    </div>
+
+    <div class="cards">
+      <div class="card gold">
+        <span class="card-emoji">⚽</span>
+        <h3>Fútbol — Pasión local</h3>
+        <p>El fútbol es el deporte rey del pueblo. Los fines de semana hay partidos en las losas del barrio. Una excelente forma de integrarte a la comunidad local desde el primer mes.</p>
+      </div>
+      <div class="card verde">
+        <span class="card-emoji">🏐</span>
+        <h3>Vóley</h3>
+        <p>Muy popular en el norte, especialmente entre jóvenes. Playa Pimentel ofrece vóley de playa los fines de semana. En Cayaltí probablemente haya grupos organizados.</p>
+      </div>
+      <div class="card cielo">
+        <span class="card-emoji">🚴</span>
+        <h3>Ciclismo de campo</h3>
+        <p>Los caminos entre los cañaverales son ideales para ciclismo de baja intensidad. Una bici podría ser tu mejor compra al llegar — útil, económica y deportiva a la vez.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INFO PRÁCTICA -->
+<section id="practica">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon">📋</div>
+      <div>
+        <h2>Información Práctica</h2>
+        <p>Todo lo que necesitas saber para instalarte bien</p>
+      </div>
+    </div>
+
+    <div class="cards" style="margin-bottom:32px;">
+      <div class="card">
+        <span class="card-emoji">🏥</span>
+        <h3>Salud</h3>
+        <p>Hay establecimiento de salud básico en Cayaltí. Para emergencias o atención especializada, Chiclayo tiene clínicas y hospitales completos a ~40 min. Lleva contigo seguro de salud o fondo de emergencia.</p>
+      </div>
+      <div class="card verde">
+        <span class="card-emoji">📱</span>
+        <h3>Conectividad</h3>
+        <p>Cobertura móvil 4G disponible con Claro o Movistar (verifica cuál tiene mejor señal en la zona). Para casa, ADSL o fibra pueden ser limitados — confirma disponibilidad al llegar.</p>
+      </div>
+      <div class="card cielo">
+        <span class="card-emoji">🏦</span>
+        <h3>Bancos & Cajeros</h3>
+        <p>Es probable que haya agentes bancarios en el pueblo para retiros básicos. Para operaciones completas, los bancos están en Chiclayo (BCP, Interbank, BBVA, Scotiabank). Lleva efectivo al inicio.</p>
+      </div>
+      <div class="card gold">
+        <span class="card-emoji">🛒</span>
+        <h3>Compras</h3>
+        <p>Mercado local para lo esencial (frutas, víveres, comida). Para electrónica, ropa, malls y supermercados grandes (Metro, Plaza Vea), planifica visitas a Chiclayo los fines de semana.</p>
+      </div>
+      <div class="card">
+        <span class="card-emoji">🚐</span>
+        <h3>Transporte</h3>
+        <p>Combis y colectivos a Chiclayo frecuentes durante el día (S/5–8 aprox). Mototaxis para moverse dentro del pueblo (S/1–2). Para viajes nocturnos o urgentes, coordina taxi privado con anticipación.</p>
+      </div>
+      <div class="card verde">
+        <span class="card-emoji">🌐</span>
+        <h3>Vida Social</h3>
+        <p>El calor humano del norte peruano es legendario. Chiclayo es llamada "Ciudad de la Amistad" con razón. En 6 meses tendrás tiempo de conocer ambientes, establecer rutinas y hacer amigos locales.</p>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <div class="ib-icon">🎯</div>
+      <div>
+        <strong>Rutina recomendada para tus 6 meses</strong>
+        <p><strong>Entre semana:</strong> Gym local por las mañanas o correr en los cañaverales → trabajo → tardes en la plaza o Casa-Hacienda. <strong>Fines de semana:</strong> Un día en Chiclayo (compras, Smart Fit, cine, restaurantes) + un día de excursión rotativa entre Zaña, Pimentel, Sipán o Túcume. Gradualmente irás conociendo todos los rincones de Lambayeque.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>Guía de Cayaltí 2026</strong> · Preparada para tu estadía de 6 meses<br>
+  <span style="font-size:12px; opacity:0.6; margin-top:6px; display:block;">Lambayeque, Perú · Clima, cultura, deporte y gastronomía</span>
+</footer>
+
+</body>
+</html>
